@@ -33,12 +33,11 @@ h4 {
 }
 
 #container {
-  border: 1px solid black;
   display: flex;
   flex-wrap: wrap;
 }
 #container > div {
-  background-color: red;
+  background-color: white;
   box-sizing: border-box;
-  border: 1px solid black;
+  border: 0.5px solid var(--bg);
 }
