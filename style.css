@@ -12,14 +12,39 @@
   text-align: center;
 }
 
-body {
+.menu {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100dvh;
+  gap: 0.5rem;
+  margin-block: 1rem;
   flex-direction: column;
-  margin: 0;
-  padding: 0;
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90dvh;
+  flex-direction: column;
+}
+
+button {
+  font-size: 1rem;
+}
+
+fieldset {
+  border: 1px solid rgb(155, 146, 215);
+  border-radius: 6px;
+  padding-inline: 0;
+  width: 400px;
+}
+
+legend {
+  padding-inline: 1rem;
+}
+
+body {
   background-color: var(--bg);
   color: var(--text-color);
 }
