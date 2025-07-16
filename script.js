@@ -22,10 +22,10 @@ function drawGrid(n) {
     container.append(square);
     square.addEventListener("mouseenter", (e) => {
       if (rainbowMode.checked) {
-        e.target.style.backgroundColor = `hsl(
-          ${Math.floor(Math.random() * 361)},
-          ${Math.floor(Math.random() * 101)}%,
-          ${Math.floor(Math.random() * 101)}%
+        e.target.style.backgroundColor = `rgb(
+          ${Math.floor(Math.random() * 256)},
+          ${Math.floor(Math.random() * 256)},
+          ${Math.floor(Math.random() * 256)}
           )`;
       }
       // else if (shadeMode.checked) {
