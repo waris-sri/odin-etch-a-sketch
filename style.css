@@ -65,4 +65,9 @@ h4 {
   background-color: white;
   box-sizing: border-box;
   border: 0.5px solid var(--bg);
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }

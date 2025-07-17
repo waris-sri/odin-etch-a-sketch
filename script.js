@@ -16,29 +16,16 @@ function drawGrid(n) {
   squareSize = containerSize / n;
   for (let i = 0; i < n * n; i++) {
     square = document.createElement("div");
-    // square.style.backgroundColor = "hsl(0, 0%, 100%)";
-    // square.dataset.shade = "0";
     square.style.width = square.style.height = `${squareSize}px`;
     container.append(square);
     square.addEventListener("mouseenter", (e) => {
       if (rainbowMode.checked) {
         e.target.style.backgroundColor = `rgb(
-          ${Math.floor(Math.random() * 256)},
-          ${Math.floor(Math.random() * 256)},
-          ${Math.floor(Math.random() * 256)}
-          )`;
-      }
-      // else if (shadeMode.checked) {
-      //   const [h, s, l] = e.target.style.backgroundColor
-      //     .match(/\d+/g)
-      //     .map(Number);
-      //   e.target.style.backgroundColor = `hsl(
-      //   ${h},
-      //   ${s}%,
-      //   ${l * 0.9}%
-      //   )`;
-      // }
-      else {
+            ${Math.floor(Math.random() * 256)},
+            ${Math.floor(Math.random() * 256)},
+            ${Math.floor(Math.random() * 256)}
+            )`;
+      } else {
         e.target.style.backgroundColor = colorSelector.value;
       }
     });
