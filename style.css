@@ -14,6 +14,15 @@
   text-align: center;
 }
 
+@media (max-width: 320px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 14px;
+  }
+}
+
 .menu {
   display: flex;
   justify-content: center;
@@ -74,6 +83,7 @@ h4 {
   margin: 0 0 1rem 0;
 }
 
+/* grid */
 #container {
   display: flex;
   flex-wrap: wrap;
@@ -89,6 +99,8 @@ h4 {
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
+  margin: 0;
+  padding: 0;
 }
 
 #control-panel {
@@ -105,4 +117,12 @@ h4 {
   width: 100%;
   max-width: var(--container-size);
   box-sizing: border-box;
+}
+
+#upper-settings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 0.5rem;
 }

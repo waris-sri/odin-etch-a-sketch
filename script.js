@@ -1,6 +1,28 @@
 const container = document.querySelector("#container");
-const containerSize = 400;
-container.style.width = container.style.height = `${containerSize}px`;
+let containerSize = 400; // default size
+
+// responsive grid
+function updateContainerSize() {
+  const screenWidth = window.innerWidth;
+  if (screenWidth <= 320) {
+    containerSize = 200;
+  } else if (screenWidth <= 375) {
+    containerSize = 250;
+  } else if (screenWidth <= 425) {
+    containerSize = 300;
+  } else {
+    containerSize = 400;
+  }
+  document.documentElement.style.setProperty(
+    "--container-size",
+    `${containerSize}px`
+  );
+  if (container.children.length > 0) {
+    const currentGridSize = Math.sqrt(container.children.length);
+    drawGrid(currentGridSize);
+  }
+}
+window.addEventListener("resize", updateContainerSize);
 
 const gridSizeInput = document.querySelector("#grid-square-num");
 const generate = document.querySelector("#generate");
@@ -32,29 +54,52 @@ function drawGrid(n) {
     square = document.createElement("div");
     square.style.width = square.style.height = `${squareSize}px`;
     container.append(square);
-
-    // add mousedown event to each square
+    /* for mouse/desktops */
+    // these events are scoped to the grid
     square.addEventListener("mousedown", (e) => {
       e.preventDefault(); // prevent text selection
       isDrawing = true;
       colorSquare(e.target);
     });
-
-    // add mouseenter event to each square for drawing while dragging
     square.addEventListener("mouseenter", (e) => {
       if (isDrawing) colorSquare(e.target);
+    });
+    /* for touchscreens */
+    square.addEventListener("touchstart", (e) => {
+      e.preventDefault(); // prevent selection
+      isDrawing = true;
+      colorSquare(e.target);
     });
   }
 }
 
-// add global mouseup event to stop drawing
+/*
+  declare these events at global scope because the area where the user can tap/click is basically
+  the whole page, and those in the grid scope are because you can only start drawing within the grid
+*/
+
+/* for mouse/desktop */
+// add global event to stop drawing
 document.addEventListener("mouseup", () => {
   isDrawing = false;
 });
-
-// prevent context menu appearance on right click
 container.addEventListener("contextmenu", (e) => {
-  e.preventDefault();
+  e.preventDefault(); // prevent showing menu on right click
+});
+/* for touchscreens */
+document.addEventListener("touchmove", (e) => {
+  if (isDrawing) {
+    const element = document.elementFromPoint(
+      e.touches[0].clientX, // first touchpoint in `touches` array
+      e.touches[0].clientY
+    );
+    // also check whether the element is inside the container and not null/undefined,
+    // e.g., when touchpoint is outside browser window
+    if (element && element.parentElement === container) colorSquare(element);
+  }
+});
+document.addEventListener("touchend", () => {
+  isDrawing = false;
 });
 
 function validateInput() {
