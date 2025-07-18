@@ -41,7 +41,7 @@ function drawGrid(n) {
     });
 
     // add mouseenter event to each square for drawing while dragging
-    square.addEventListener("mousemove", (e) => {
+    square.addEventListener("mouseenter", (e) => {
       if (isDrawing) colorSquare(e.target);
     });
   }
