@@ -13,10 +13,10 @@ function updateContainerSize() {
   } else {
     containerSize = 400;
   }
-  document.documentElement.style.setProperty(
-    "--container-size",
-    `${containerSize}px`
-  );
+  document.querySelector("#container").style.width = `${containerSize}px`;
+  document.querySelector("#container").style.height = `${containerSize}px`;
+  document.querySelector("fieldset").style.width = `${containerSize}px`;
+  document.querySelector("#generate").style.width = `${containerSize}px`;
   if (container.children.length > 0) {
     const currentGridSize = Math.sqrt(container.children.length);
     drawGrid(currentGridSize);
@@ -74,8 +74,8 @@ function drawGrid(n) {
 }
 
 /*
-  declare these events at global scope because the area where the user can tap/click is basically
-  the whole page, and those in the grid scope are because you can only start drawing within the grid
+declare these events at global scope because the area where the user can tap/click is basically
+the whole page, and those in the grid scope are because you can only start drawing within the grid
 */
 
 /* for mouse/desktop */
@@ -100,6 +100,7 @@ document.addEventListener("touchmove", (e) => {
 });
 document.addEventListener("touchend", () => {
   isDrawing = false;
+  generate.innerText = "Generate";
 });
 
 function validateInput() {
