@@ -11,6 +11,20 @@ const defaultMode = document.querySelector("#default");
 
 let squareSize;
 let square;
+let isDrawing = false;
+
+function colorSquare(square) {
+  if (rainbowMode.checked) {
+    square.style.backgroundColor = `rgb(
+        ${Math.floor(Math.random() * 256)},
+        ${Math.floor(Math.random() * 256)},
+        ${Math.floor(Math.random() * 256)}
+        )`;
+  } else {
+    square.style.backgroundColor = colorSelector.value;
+  }
+}
+
 function drawGrid(n) {
   container.innerHTML = ""; // reset
   squareSize = containerSize / n;
@@ -18,37 +32,48 @@ function drawGrid(n) {
     square = document.createElement("div");
     square.style.width = square.style.height = `${squareSize}px`;
     container.append(square);
-    square.addEventListener("mouseenter", (e) => {
-      if (rainbowMode.checked) {
-        e.target.style.backgroundColor = `rgb(
-            ${Math.floor(Math.random() * 256)},
-            ${Math.floor(Math.random() * 256)},
-            ${Math.floor(Math.random() * 256)}
-            )`;
-      } else {
-        e.target.style.backgroundColor = colorSelector.value;
-      }
+
+    // add mousedown event to each square
+    square.addEventListener("mousedown", (e) => {
+      e.preventDefault(); // prevent text selection
+      isDrawing = true;
+      colorSquare(e.target);
+    });
+
+    // add mouseenter event to each square for drawing while dragging
+    square.addEventListener("mousemove", (e) => {
+      if (isDrawing) colorSquare(e.target);
     });
   }
 }
 
-function validate() {
+// add global mouseup event to stop drawing
+document.addEventListener("mouseup", () => {
+  isDrawing = false;
+});
+
+// prevent context menu appearance on right click
+container.addEventListener("contextmenu", (e) => {
+  e.preventDefault();
+});
+
+function validateInput() {
   const size = parseInt(gridSizeInput.value);
   if (isNaN(size) || size < 2 || size > 100) {
-    alert("Enter a number from 2 to 100");
+    alert("Enter a positive integer from 2 to 100.");
     return null;
   }
   return size;
 }
 
 generate.addEventListener("click", () => {
-  const size = validate();
+  const size = validateInput();
   if (size !== null) drawGrid(size);
 });
 
 gridSizeInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
-    const size = validate();
+    const size = validateInput();
     if (size !== null) drawGrid(size);
   }
 });

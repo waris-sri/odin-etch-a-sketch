@@ -3,6 +3,8 @@
 :root {
   --bg: lavender;
   --text-color: darkslateblue;
+  --border: rgb(155, 146, 215);
+  --container-size: 400px;
 }
 
 * {
@@ -17,7 +19,6 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  margin-block: 1rem;
   flex-direction: column;
 }
 
@@ -31,17 +32,33 @@
 
 button {
   font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  border: 1px solid var(--bg);
+  background-color: var(--text-color);
+  color: var(--bg);
+  padding: 0.5rem;
+}
+button:hover {
+  cursor: pointer;
+}
+button:active {
+  background-color: var(--bg);
+  color: var(--text-color);
+  border: 1px solid var(--text-color);
 }
 
 fieldset {
-  border: 1px solid rgb(155, 146, 215);
+  border: 1px solid var(--border);
   border-radius: 6px;
   padding-inline: 0;
-  width: 400px;
+  width: var(--container-size);
+  box-sizing: border-box;
 }
 
 legend {
   padding-inline: 1rem;
+  font-weight: bold;
 }
 
 body {
@@ -60,6 +77,8 @@ h4 {
 #container {
   display: flex;
   flex-wrap: wrap;
+  width: var(--container-size);
+  height: var(--container-size);
 }
 #container > div {
   background-color: white;
@@ -70,4 +89,20 @@ h4 {
   -khtml-user-select: none;
   -webkit-user-select: none;
   -o-user-select: none;
+}
+
+#control-panel {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: var(--container-size);
+}
+
+#generate {
+  width: 100%;
+  max-width: var(--container-size);
+  box-sizing: border-box;
 }
