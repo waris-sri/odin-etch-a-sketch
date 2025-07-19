@@ -8,35 +8,33 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <div id="main">
-      <h4>The Odin Project</h4>
-      <h1>Simple Etch-a-Sketch</h1>
-      <p>Click and hold on the grid to draw.</p>
-      <div id="container"></div>
-      <div id="control-panel">
-        <fieldset class="menu">
-          <legend>Settings</legend>
-          <div id="upper-settings">
-            <label for="grid-square-num">Size</label>
-            <input
-              type="number"
-              inputmode="numeric"
-              id="grid-square-num"
-              min="2"
-              max="100"
-              placeholder="2–100"
-            />
-            <input type="color" id="color-selector" value="#000000" />
-          </div>
-          <div>
-            <input type="radio" id="default" name="settings" value="default" />
-            <label for="default">Default</label>
-            <input type="radio" id="rainbow" name="settings" />
-            <label for="rainbow">Rainbow</label>
-          </div>
-        </fieldset>
-        <button type="submit" id="generate">Renew</button>
-      </div>
+    <h4>The Odin Project</h4>
+    <h1>Simple Etch-a-Sketch</h1>
+    <p>Click and hold on the grid to draw.</p>
+    <div id="container"></div>
+    <div id="control-panel">
+      <fieldset class="menu">
+        <legend>Settings</legend>
+        <div id="upper-settings">
+          <label for="grid-square-num">Size</label>
+          <input
+            type="number"
+            inputmode="numeric"
+            id="grid-square-num"
+            min="2"
+            max="100"
+            placeholder="2–100"
+          />
+          <input type="color" id="color-selector" value="#000000" />
+        </div>
+        <div>
+          <input type="radio" id="default" name="settings" value="default" />
+          <label for="default">Default</label>
+          <input type="radio" id="rainbow" name="settings" />
+          <label for="rainbow">Rainbow</label>
+        </div>
+      </fieldset>
+      <button type="submit" id="generate">Renew</button>
     </div>
   </body>
 </html>

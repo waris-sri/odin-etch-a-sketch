@@ -22,6 +22,8 @@ function updateContainerSize() {
     drawGrid(currentGridSize);
   }
 }
+
+updateContainerSize();
 window.addEventListener("resize", updateContainerSize);
 
 const gridSizeInput = document.querySelector("#grid-square-num");
@@ -49,13 +51,14 @@ function colorSquare(square) {
 
 function drawGrid(n) {
   container.innerHTML = ""; // reset
-  squareSize = containerSize / n;
+  squareSize = Math.floor(containerSize / n); // prevent floating-point precision errors in CSS
   for (let i = 0; i < n * n; i++) {
     square = document.createElement("div");
     square.style.width = square.style.height = `${squareSize}px`;
     container.append(square);
-    /* for mouse/desktops */
-    // these events are scoped to the grid
+    /* FOR MOUSE/DESKTOPS */
+    // these events are scoped to the grid as they can only be triggered
+    // when the cursor/touchpoint is on the grid
     square.addEventListener("mousedown", (e) => {
       e.preventDefault(); // prevent text selection
       isDrawing = true;
@@ -64,7 +67,7 @@ function drawGrid(n) {
     square.addEventListener("mouseenter", (e) => {
       if (isDrawing) colorSquare(e.target);
     });
-    /* for touchscreens */
+    /* FOR TOUCHSCREENS */
     square.addEventListener("touchstart", (e) => {
       e.preventDefault(); // prevent selection
       isDrawing = true;
@@ -74,11 +77,11 @@ function drawGrid(n) {
 }
 
 /*
-declare these events at global scope because the area where the user can tap/click is basically
-the whole page, and those in the grid scope are because you can only start drawing within the grid
+  declare following events at global scope because the area where the user can tap/click is basically
+  the whole page, and those are in the grid scope because you can only start drawing within the grid
 */
 
-/* for mouse/desktop */
+/* FOR MOUSE/DESKTOP */
 // add global event to stop drawing
 document.addEventListener("mouseup", () => {
   isDrawing = false;
@@ -86,7 +89,7 @@ document.addEventListener("mouseup", () => {
 container.addEventListener("contextmenu", (e) => {
   e.preventDefault(); // prevent showing menu on right click
 });
-/* for touchscreens */
+/* FOR TOUCHSCREENS */
 document.addEventListener("touchmove", (e) => {
   if (isDrawing) {
     const element = document.elementFromPoint(
